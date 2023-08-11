@@ -6,6 +6,7 @@ import java.math.BigInteger;
 import java.util.List;
 
 @Entity
+@Table(name = "users")
 public class User {
 
     @Id
@@ -20,10 +21,22 @@ public class User {
 
     private BigInteger phone;
 
+    private Role role;
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Portfolio> portfolios;
 
     public User(){}
+
+    public User(String username, String email, String password, BigInteger phone, Role role, List<Portfolio> portfolios) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.phone = phone;
+        this.role = role;
+        this.portfolios = portfolios;
+    }
+
     public Long getId() {
         return Id;
     }
@@ -72,6 +85,13 @@ public class User {
         this.portfolios = portfolios;
     }
 
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
 
     @Override
     public String toString() {
@@ -81,6 +101,7 @@ public class User {
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", phone=" + phone +
+                ", role=" + role +
                 ", portfolios=" + portfolios +
                 '}';
     }
