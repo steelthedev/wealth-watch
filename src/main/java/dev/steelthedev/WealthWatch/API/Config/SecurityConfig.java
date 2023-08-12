@@ -61,6 +61,7 @@ public class SecurityConfig {
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/users/profile")).authenticated()
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/auth/create")).permitAll()
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/auth/login")).permitAll()
+                        .requestMatchers(AntPathRequestMatcher.antMatcher("/portfolio/**")).authenticated()
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/error")).permitAll()
                         .anyRequest().authenticated()
                 )

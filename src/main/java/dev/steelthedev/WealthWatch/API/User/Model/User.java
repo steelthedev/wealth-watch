@@ -1,5 +1,6 @@
 package dev.steelthedev.WealthWatch.API.User.Model;
 
+import dev.steelthedev.WealthWatch.API.Portfolio.Model.Portfolio;
 import jakarta.persistence.*;
 
 import java.math.BigInteger;
@@ -23,18 +24,16 @@ public class User {
 
     private Role role;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<Portfolio> portfolios;
 
     public User(){}
 
-    public User(String username, String email, String password, BigInteger phone, Role role, List<Portfolio> portfolios) {
+    public User(String username, String email, String password, BigInteger phone, Role role) {
         this.username = username;
         this.email = email;
         this.password = password;
         this.phone = phone;
         this.role = role;
-        this.portfolios = portfolios;
+
     }
 
     public Long getId() {
@@ -77,13 +76,7 @@ public class User {
         this.phone = phone;
     }
 
-    public List<Portfolio> getPortfolios() {
-        return portfolios;
-    }
 
-    public void setPortfolios(List<Portfolio> portfolios) {
-        this.portfolios = portfolios;
-    }
 
     public Role getRole() {
         return role;
@@ -102,7 +95,6 @@ public class User {
                 ", password='" + password + '\'' +
                 ", phone=" + phone +
                 ", role=" + role +
-                ", portfolios=" + portfolios +
                 '}';
     }
 }

@@ -31,8 +31,8 @@ public class AuthController {
                 request.email(),
                 encoder.encode(request.password()),
                 request.phone(),
-                Role.USER,
-                null
+                Role.USER
+
         ));
     }
 

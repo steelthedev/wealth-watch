@@ -6,10 +6,14 @@ import dev.steelthedev.WealthWatch.API.User.Repository.UserRepository;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
-public class AuthServices {
+public class AuthServices implements AuthServiceInt {
 
     public AuthServices(UserRepository userRepository, AuthenticationManager authenticationManager, TokenService tokenService) {
         this.userRepository = userRepository;
@@ -39,5 +43,15 @@ public class AuthServices {
     public String login(String username, String password){
         Authentication authentication =authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username,password));
         return tokenService.generateToken(authentication);
+    }
+
+    @Override
+    public Optional<User> getAuthenticatedUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        System.out.println(authentication.getPrincipal());
+        if (authentication != null && authentication.isAuthenticated()) {
+            return userRepository.findByUsername(authentication.getName());
+
+        }else return null;
     }
 }
