@@ -28,4 +28,8 @@ public class UserServices implements UserDetailsService {
     public Optional<User> getUser(Long id){
         return userRepository.findById(id);
     }
+
+    public Optional<User> getProfile(String username){
+        return userRepository.findByUsername(username);
+    }
 }

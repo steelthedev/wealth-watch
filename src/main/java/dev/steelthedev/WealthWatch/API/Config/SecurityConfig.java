@@ -58,7 +58,10 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/users/**")).permitAll()
+                        .requestMatchers(AntPathRequestMatcher.antMatcher("/users/profile")).authenticated()
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/auth/create")).permitAll()
+                        .requestMatchers(AntPathRequestMatcher.antMatcher("/auth/login")).permitAll()
+                        .requestMatchers(AntPathRequestMatcher.antMatcher("/error")).permitAll()
                         .anyRequest().authenticated()
                 )
                 .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)
