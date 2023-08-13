@@ -1,10 +1,12 @@
 package dev.steelthedev.WealthWatch.API.Portfolio.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import dev.steelthedev.WealthWatch.API.Investment.Model.InvestmentTransaction;
 import dev.steelthedev.WealthWatch.API.User.Model.User;
 import jakarta.persistence.*;
 
 import java.util.List;
+import java.util.function.Consumer;
 
 @Entity
 @Table(name = "portfolio")
@@ -23,6 +25,7 @@ public class Portfolio {
     private User user;
 
     @OneToMany(mappedBy = "portfolio", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("portfolio")
     private List<InvestmentTransaction> transaction;
 
     public Portfolio(){}
